@@ -12,14 +12,22 @@ public class BoardService {
 
     @Autowired // 스프링 빈이 알아서 값을 넣어줌
     private BoardRepository boardRepository;
+    // 글 작성 처리
     public void write(Board board) {
 
         boardRepository.save(board);
     }
 
+    // 게시물 리스트 처리
     public List<Board> boardList() {
 
         return boardRepository.findAll();
         //List 안에 담겨있는 모든 요소 반환
+    }
+
+    // 특정 게시물 불러오기
+    public Board boardView(Integer id) {
+        // 특정 id 번호 게시물을 불러온다.
+        return boardRepository.findById(id).get();
     }
 }

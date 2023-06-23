@@ -20,7 +20,7 @@ public class BoardController {
         return "boardWrite";
     }
 
-    @PostMapping("board/writepro")
+    @PostMapping("/board/writepro")
     public String boardWritePro(Board board) {
 
         boardService.write(board);
@@ -28,12 +28,19 @@ public class BoardController {
         return "";
     }
 
-    @GetMapping("board/list")
+    @GetMapping("/board/list")
     public String boardList(Model model) {
 
         model.addAttribute("list", boardService.boardList());
         // 리스트 안에 있는 보드를 리스트라는 이름으로 전송
 
         return "boardlist";
+    }
+
+    @GetMapping("/board/view")
+    public String boardView(Model model, Integer id) {
+        //localhost:8080/board/view?id=1 ...
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardview";
     }
 }
