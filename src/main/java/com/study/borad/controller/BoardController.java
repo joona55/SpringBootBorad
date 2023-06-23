@@ -43,4 +43,12 @@ public class BoardController {
         model.addAttribute("board", boardService.boardView(id));
         return "boardview";
     }
+
+    @GetMapping("/board/delete")
+    public String boardDelete(Integer id) {
+
+        boardService.boardDelete(id);
+        // 글 삭제 후 게시물 리스트로 돌아가기
+        return "redirect:/board/list";
+    }
 }
