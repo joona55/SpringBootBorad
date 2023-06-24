@@ -2,9 +2,11 @@ package com.study.borad.service;
 
 import com.study.borad.entity.Board;
 import com.study.borad.repository.BoardRepository;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -35,4 +37,6 @@ public class BoardService {
     public void boardDelete(Integer id) {
         boardRepository.deleteById(id);
     }
+
+
 }

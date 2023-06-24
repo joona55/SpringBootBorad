@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -49,6 +50,33 @@ public class BoardController {
 
         boardService.boardDelete(id);
         // 글 삭제 후 게시물 리스트로 돌아가기
+        return "redirect:/board/list";
+    }
+
+    @GetMapping("/board/modify/{id}")
+    public String boardModify(@PathVariable("id") Integer id, Model model) {
+    // @PathVariable : URL 내 id 부분을 인식하여 파라미터로 받음.
+
+        model.addAttribute("board", boardService.boardView(id));
+
+        return "boardModify";
+    }
+
+    /*
+     * 덮어씌우는 방식은 문제가 생길 수 있기 때문에 JPA 변경감지를 통해
+     * 엔티티에 수정이 이루어질 경우 트랙잭션이 끝날 때 자동으로 DB에
+     * 반영되기 때문에 JPA 변경감지, JPA merge, JPA persist 등의
+     * 공부가 필요하다.
+     */
+    @PostMapping("/board/update/{id}")
+    public String boardUpdate(@PathVariable("id") Integer id, Board board) {
+
+        Board boardTmp = boardService.boardView(id);
+        boardTmp.setTitle(board.getTitle());
+        boardTmp.setContent(board.getContent());
+
+        boardService.write(boardTmp);
+
         return "redirect:/board/list";
     }
 }
