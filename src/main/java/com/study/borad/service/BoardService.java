@@ -38,5 +38,15 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
+    // 변경 감지를 통한 게시물 수정
+    @Transactional
+    public Board boardUpdate(Integer id, Board board) {
 
+        Board boardRes = boardRepository.findById(id).get();
+
+        boardRes.setTitle(board.getTitle());
+        boardRes.setContent(board.getContent());
+
+        return boardRes;
+    }
 }

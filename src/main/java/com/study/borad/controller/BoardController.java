@@ -70,12 +70,14 @@ public class BoardController {
      */
     @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Integer id, Board board) {
-
+        /*
         Board boardTmp = boardService.boardView(id);
         boardTmp.setTitle(board.getTitle());
         boardTmp.setContent(board.getContent());
 
         boardService.write(boardTmp);
+        */
+        boardService.boardUpdate(id, board);
 
         return "redirect:/board/list";
     }
