@@ -5,6 +5,8 @@ import com.study.borad.repository.BoardRepository;
 import org.hibernate.MultiIdentifierLoadAccess;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,9 +39,9 @@ public class BoardService {
     }
 
     // 게시물 리스트 처리
-    public List<Board> boardList() {
+    public Page<Board> boardList(Pageable pageable) {
 
-        return boardRepository.findAll();
+        return boardRepository.findAll(pageable);
         //List 안에 담겨있는 모든 요소 반환
     }
 
