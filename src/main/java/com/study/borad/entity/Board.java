@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity // 테이블을 의미
+@Entity // 객체
 @Data // 데이터를 받을 수 있게 해줌
 public class Board {
 
@@ -19,5 +19,9 @@ public class Board {
     private String title;
 
     private String content;
+
+    private String filename;
+
+    private String filepath;
 
 }

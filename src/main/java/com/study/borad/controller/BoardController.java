@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class BoardController {
@@ -22,11 +23,14 @@ public class BoardController {
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board) {
+    public String boardWritePro(Board board, Model model, MultipartFile file) throws Exception {
 
-        boardService.write(board);
+        boardService.write(board, file);
 
-        return "";
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
+
+        return "message";
     }
 
     @GetMapping("/board/list")
@@ -46,11 +50,13 @@ public class BoardController {
     }
 
     @GetMapping("/board/delete")
-    public String boardDelete(Integer id) {
+    public String boardDelete(Integer id, Model model) {
 
+        model.addAttribute("message", "글 삭제가 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
         boardService.boardDelete(id);
         // 글 삭제 후 게시물 리스트로 돌아가기
-        return "redirect:/board/list";
+        return "message";
     }
 
     @GetMapping("/board/modify/{id}")
@@ -69,7 +75,8 @@ public class BoardController {
      * 공부가 필요하다.
      */
     @PostMapping("/board/update/{id}")
-    public String boardUpdate(@PathVariable("id") Integer id, Board board) {
+    public String boardUpdate(@PathVariable("id") Integer id, Board board,
+                              Model model, MultipartFile file) throws Exception {
         /*
         Board boardTmp = boardService.boardView(id);
         boardTmp.setTitle(board.getTitle());
@@ -77,8 +84,11 @@ public class BoardController {
 
         boardService.write(boardTmp);
         */
+        model.addAttribute("message", "글 수정이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/board/list");
+        
         boardService.boardUpdate(id, board);
-
-        return "redirect:/board/list";
+    
+        return "message";
     }
 }
