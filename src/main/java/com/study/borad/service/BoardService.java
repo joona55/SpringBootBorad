@@ -45,6 +45,11 @@ public class BoardService {
         //List 안에 담겨있는 모든 요소 반환
     }
 
+    public Page<Board> boardSearchList(String searchKeyword, Pageable pageable) {
+
+        return boardRepository.findByTitleContaining(searchKeyword, pageable);
+    }
+
     // 특정 게시물 불러오기
     public Board boardView(Integer id) {
         // 특정 id 번호 게시물을 불러온다.
