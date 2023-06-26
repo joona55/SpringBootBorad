@@ -51,6 +51,8 @@ public class BoardController {
             list = boardService.boardSearchList(searchKeyword, pageable);
         }
 
+        int firstPage = 0;
+        int lastPage = list.getTotalPages() - 1;
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
@@ -59,6 +61,8 @@ public class BoardController {
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("firstPage", firstPage);
+        model.addAttribute("lastPage", lastPage);
         // 리스트 안에 있는 보드를 리스트라는 이름으로 전송
 
         return "boardlist";
