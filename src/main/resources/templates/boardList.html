@@ -12,7 +12,6 @@
         margin-top : 40px;
   }
 
-
 </style>
 
 <body>
@@ -34,7 +33,6 @@
         </tr>
       </tbody>
     </table>
-
     <a th:href="@{/board/list(page = ${firstPage})}" th:text="처음"></a>
     <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
       <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>

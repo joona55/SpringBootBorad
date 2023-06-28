@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>시작 화면</title>
+</head>
+<style>
+  .list {
+    color: gray;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+    width: 400px;
+  }
+</style>
+<body>
+  <div class="list">
+    <h1> Welcome my board! </h1>
+    <a th:href="@{/board/list}">보드 리스트로 이동</a>
+  </div>
+</body>
+</html>
